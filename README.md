@@ -9,6 +9,13 @@ to pipe stuff between commands and redirect it to easy-to-read files.
 
 Plus, tab delimitted text is easy to use with MS Excel, R etc.
 
+## Installation
+
+Requires Python2 and the requests library which can be installed as
+follows:
+
+	pip install -r requirements.txt
+
 ## Authentication
 
 All these commands take -u and -p flags for username and password
@@ -77,9 +84,10 @@ Tested on a Mac. Thought to work on Linux. Might work on Windows.
 
 ## References
 
-https://sentinel.esa.int/web/sentinel/sentinel-data-access
+https://scihub.copernicus.eu
 
-https://scihub.esa.int/userguide/5APIsAndBatchScripting 
+https://scihub.copernicus.eu/userguide/5APIsAndBatchScripting
 
-Rob Blackwell <rob.blackwell@cranfield.ac.uk>
-November 2015
+Rob Blackwell    
+<rob.blackwell@cranfield.ac.uk>    
+December 2015
