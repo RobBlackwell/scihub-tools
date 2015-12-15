@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import sys
 import requests
 import getpass
@@ -15,11 +14,11 @@ def print_entry(entry):
     id =  entry['id']
     title =  entry['title']
     summary =  entry['summary']
-    print '{}\t{}\t"{}"'.format(id, title, summary)
+    print ('{}\t{}\t"{}"'.format(id, title, summary))
     
 def search (auth, query):
 
-    url = 'https://scihub.esa.int/apihub/search?format=json&q={}'.format(query)
+    url = 'https://scihub.copernicus.eu/apihub/search?format=json&q={}'.format(query)
 
     #print url
     #exit()
@@ -41,7 +40,9 @@ def search (auth, query):
                 print_entry(entry)
         else:
             print_entry(entries)
-            
+    else:
+        sys.stderr.write('%s:%s\n' % (response.status_code, response.text))
+        
 def toploop(auth):
 
     while 1:

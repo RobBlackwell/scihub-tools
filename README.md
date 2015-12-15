@@ -1,7 +1,7 @@
 # Scihub Tools
 
 Some simple, shell-friendly tools for working with the ESA
-[Sentinels Scientific Data Hub](https://scihub.esa.int)
+[Sentinels Scientific Data Hub](https://scihub.copernicus.eu/)
 
 When working at a shell prompt, you don't really want XML or JSON or
 ODATA - tab delitted text is easier to play with. You want to be able
@@ -17,7 +17,7 @@ respectively, but you might find it easier to put your credentials in
 
 Create or edit you ~/.netrc and include these lines:
 
-	machine scihub.esa.int
+	machine scihub.copernicus.eu
         login your-username
         password your-password
 
