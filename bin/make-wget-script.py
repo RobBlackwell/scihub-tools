@@ -19,7 +19,7 @@ def wget_command (username, password, uuid, filename):
     if password is not None:
         password_option = ' --passwrod={}'.format(password)
         
-    s = 'wget --continue{}{} "https://scihub.esa.int/apihub/odata/v1/Products(\'{}\')/\$value"{}'.format(user_option, password_option, uuid, filename_option)
+    s = 'wget --continue{}{} "https://scihub.copernicus.eu/apihub/odata/v1/Products(\'{}\')/\$value"{}'.format(user_option, password_option, uuid, filename_option)
 
     print s
 
