@@ -11,7 +11,7 @@ Plus, tab delimitted text is easy to use with MS Excel, R etc.
 
 ## Installation
 
-Requires Python2 and the requests library which can be installed as
+Requires Python 3 and the requests library which can be installed as
 follows:
 
 	pip install -r requirements.txt
@@ -78,9 +78,6 @@ products.
 	wget --continue "https://scihub.esa.int/apihub/odata/v1/Products('a6ddd7a2-2606-4e89-a2bc-dda45fdf6952')/\$value" -O S1A_IW_SLC__1SSH_20151122T192547_20151122T192614_008721_00C6AF_884E.zip
 	...
 
-## Notes
-
-Tested on a Mac. Thought to work on Linux. Might work on Windows.
 
 ## References
 
@@ -90,4 +87,4 @@ https://scihub.copernicus.eu/userguide/5APIsAndBatchScripting
 
 Rob Blackwell    
 <rob.blackwell@cranfield.ac.uk>    
-December 2015
+May 2016
