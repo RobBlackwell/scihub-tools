@@ -98,12 +98,12 @@ We can then use GDAL to reproject the image and cut out our area of interest:
 N.B. Many previewers might show the result as just black, in which
 case you might need to hack the colour table.
 
-    gdalinfo --m iow.tiff
+    gdalinfo -mm iow.tiff
 
 This will show you the max and min values. Say they are 35 and 2402
 then you can scale the color table like this:
 
-    gdal_translate -sclae 35 2402 0 32767 iow.tiff preview.tiff
+    gdal_translate -scale 35 2402 0 32767 iow.tiff preview.tiff
 
 ## References
 
