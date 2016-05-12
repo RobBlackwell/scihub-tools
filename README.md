@@ -4,7 +4,7 @@ Some simple, shell-friendly tools for working with the ESA
 [Sentinels Scientific Data Hub](https://scihub.copernicus.eu/)
 
 When working at a shell prompt, you don't really want XML or JSON or
-ODATA - tab delitted text is easier to play with. You want to be able
+ODATA - tab delimitted text is easier to play with. You want to be able
 to pipe stuff between commands and redirect it to easy-to-read files.
 
 Plus, tab delimitted text is easy to use with MS Excel, R etc.
@@ -95,7 +95,7 @@ We can then use GDAL to reproject the image and cut out our area of interest:
     export FILE_PATH=S1A_IW_GRDH_1SDV_20160509T061446_20160509T061511_011178_010E17_D8BF.SAFE/measurement/s1a-iw-grd-vh-20160509t061446-20160509t061511-011178-010e17-002.tiff
     gdalwarp -t_srs EPSG:27700 -te_srs EPSG:4326 -r cubic -te -1.66 50.56 -1.04 50.77 $FILE_PATH iow.tiff
 
-N.B. Many previewers might show the result as just black, in which
+N.B. Many image previewers might show the result as just black, in which
 case you might need to hack the colour table.
 
     gdalinfo -mm iow.tiff
