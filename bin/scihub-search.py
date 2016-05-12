@@ -11,38 +11,42 @@ from optparse import OptionParser
 # id filename description
 
 def print_entry(entry):
-    id =  entry['id']
-    title =  entry['title']
-    summary =  entry['summary']
-    print ('{}\t{}\t"{}"'.format(id, title, summary))
-    
+    if 'id' in entry:
+        id =  entry['id']
+        title =  entry['title']
+        summary =  entry['summary']
+        print ('{}\t{}\t"{}"'.format(id, title, summary))
+
+
 def search (auth, query):
 
     url = 'https://scihub.copernicus.eu/apihub/search?format=json&q={}'.format(query)
 
     #print url
     #exit()
-    
+
     response = requests.get(url, auth=auth)
 
     #print response.status_code
-    #print response.text
+    #print (response.text)
     #exit()
 
     if response.status_code == 200:
         j = json.loads(response.text)
 
-        entries = j['feed']['entry']
+        # print(j)
+        if 'entry' in j['feed']:
+            entries = j['feed']['entry']
 
-        # An entry can be a single entry or a list of entries.
-        if isinstance(entries, list):
-            for entry in entries:
-                print_entry(entry)
-        else:
-            print_entry(entries)
+            # An entry can be a single entry or a list of entries.
+            if isinstance(entries, list):
+                for entry in entries:
+                    print_entry(entry)
+                else:
+                    print_entry(entries)
     else:
         sys.stderr.write('%s:%s\n' % (response.status_code, response.text))
-        
+
 def toploop(auth):
 
     while 1:
@@ -52,7 +56,6 @@ def toploop(auth):
         if len(x) > 0:
             query = x[0]
         search (auth, query)
-    
 
 if __name__ == "__main__":
 
@@ -63,7 +66,7 @@ if __name__ == "__main__":
                       help='Your Scihub password.')
     parser.add_option('-q', '--query', dest='query',
                       help='Open search query expression.')
-      
+
     (options, args) = parser.parse_args()
 
     username = options.user
