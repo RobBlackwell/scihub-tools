@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 import sys
-import requests
 import getpass
-import json
 from optparse import OptionParser
+import scihub
 
 # Runs Open search queries against the Sentinels Scientific Data Hub.
 # You might consider putting tour credentials in ~/.netrc
-# Output is tab delimitted text of the format
+# Output is tab delimitted text of the form
 # id filename description
 
 def print_entry(entry):
@@ -18,44 +17,23 @@ def print_entry(entry):
         print ('{}\t{}\t"{}"'.format(id, title, summary))
 
 
-def search (auth, query):
-
-    url = 'https://scihub.copernicus.eu/apihub/search?format=json&q={}'.format(query)
-
-    #print url
-    #exit()
-
-    response = requests.get(url, auth=auth)
-
-    #print response.status_code
-    #print (response.text)
-    #exit()
-
-    if response.status_code == 200:
-        j = json.loads(response.text)
-
-        # print(j)
-        if 'entry' in j['feed']:
-            entries = j['feed']['entry']
-
-            # An entry can be a single entry or a list of entries.
-            if isinstance(entries, list):
-                for entry in entries:
-                    print_entry(entry)
-                else:
-                    print_entry(entries)
+def print_entries(entries):
+    # An entry can be a single entry or a list of entries.
+    if isinstance(entries, list):
+        for entry in entries:
+            print_entry(entry)
     else:
-        sys.stderr.write('%s:%s\n' % (response.status_code, response.text))
+        print_entry(entries)
 
 def toploop(auth):
-
     while 1:
         query = sys.stdin.readline()
         if not query: break
         x = query.split()
         if len(x) > 0:
             query = x[0]
-        search (auth, query)
+        entries = scihub.search (query, auth)
+        print_entries(entries)
 
 if __name__ == "__main__":
 
@@ -85,5 +63,5 @@ if __name__ == "__main__":
     if query is None:
         toploop(auth)
     else:
-        search(auth, query)
-
+        entries = scihub.search(query, auth)
+        print_entries(entries)
