@@ -64,18 +64,17 @@ The output format consists of an id, a title and a summary. Here's an example:
     8aa5b71a-a3c2-4e2c-81e1-e22c12c6cd7a	S1A_IW_SLC__1SSH_20151122T192407_20151122T192434_008721_00C6AF_6A8B	"Date: 2015-11-22T19:24:07.693Z, Instrument: SAR-C SAR, Mode: HH, Satellite: Sentinel-1, Size: 3.41 GB"
     ..
 
-## make-wget-script.py
+## make-curl-script.py
 
 Takes as input, the output described above above and creates a series
-of wget commands that, when executed, will download the actual
+of curl commands that, when executed, will download the actual
 products.
 
-	$ ./scihub-search.py -q "*" | ./make-wget-script.py 
-	wget --continue "https://scihub.esa.int/apihub/odata/v1/Products('e36ab44b-cceb-4f00-a9a7-469abb98e7af')/\$value" -O S1A_IW_SLC__1SSH_20151122T192637_20151122T192708_008721_00C6AF_9F4D.zip
-	wget --continue "https://scihub.esa.int/apihub/odata/v1/Products('0f76e416-a923-4837-8fac-be1bdb6a030a')/\$value" -O S1A_IW_SLC__1SSH_20151122T192612_20151122T192639_008721_00C6AF_63C9.zip
-	wget --continue "https://scihub.esa.int/apihub/odata/v1/Products('8aa5b71a-a3c2-4e2c-81e1-e22c12c6cd7a')/\$value" -O S1A_IW_SLC__1SSH_20151122T192407_20151122T192434_008721_00C6AF_6A8B.zip
-	wget --continue "https://scihub.esa.int/apihub/odata/v1/Products('a6ddd7a2-2606-4e89-a2bc-dda45fdf6952')/\$value" -O S1A_IW_SLC__1SSH_20151122T192547_20151122T192614_008721_00C6AF_884E.zip
-	...
+	$ ./scihub-search.py -q "*" | ./make-curl-script.py 
+	curl --retry 5 -C - -n -JO "https://scihub.copernicus.eu/apihub/odata/v1/Products('bd568c6b-3b05-48dc-8487-bf1dd22727ba')/\$value"
+	curl --retry 5 -C - -n -JO "https://scihub.copernicus.eu/apihub/odata/v1/Products('39669329-7260-4bf3-a28e-e1d8f08e9a36')/\$value"
+	curl --retry 5 -C - -n -JO "https://scihub.copernicus.eu/apihub/odata/v1/Products('7140df04-8b63-484d-8bc0-5dca8b73b516')/\$value"
+
 
 ## Worked Example
 
@@ -104,6 +103,13 @@ This will show you the max and min values. Say they are 35 and 2402
 then you can scale the color table like this:
 
     gdal_translate -scale 35 2402 0 32767 iow.tiff preview.tiff
+
+## Hints
+
+If you get trouble with curl, you might need to add the following to
+you ~/.bashrc
+
+	export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
 ## References
 
