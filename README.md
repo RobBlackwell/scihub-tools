@@ -81,7 +81,7 @@ products.
 Let's say we want to get an image for the Isle of Wight (See example
 in examples/iow)
 
-    ../../bin/scihub-search.py -q "productType:GRD AND footprint:\"Intersects(POLYGON((-1.66 50.56, -1.04 50.56, -1.04 50.77, -1.66 50.77, -1.66 50.56)))\"&rows=1" | ../../bin/make-wget-script.py > step2.sh
+    ../../bin/scihub-search.py -q "productType:GRD AND footprint:\"Intersects(POLYGON((-1.66 50.56, -1.04 50.56, -1.04 50.77, -1.66 50.77, -1.66 50.56)))\"&rows=1" | ../../bin/make-curl-script.py > step2.sh
 
 Now execute step2.h to download the imagery
 
