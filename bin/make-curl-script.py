@@ -25,8 +25,6 @@ def toploop(username, password):
         if len(x) > 1:
             uuid = x[0]
             title = x[1]
-            print (uuid)
-            print(title)
             print(curl_command (username, password, uuid, title))
 
 

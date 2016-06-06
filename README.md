@@ -71,9 +71,9 @@ of curl commands that, when executed, will download the actual
 products.
 
 	$ ./scihub-search.py -q "*" | ./make-curl-script.py 
-	curl --retry 5 -C - -n -JO "https://scihub.copernicus.eu/apihub/odata/v1/Products('bd568c6b-3b05-48dc-8487-bf1dd22727ba')/\$value"
-	curl --retry 5 -C - -n -JO "https://scihub.copernicus.eu/apihub/odata/v1/Products('39669329-7260-4bf3-a28e-e1d8f08e9a36')/\$value"
-	curl --retry 5 -C - -n -JO "https://scihub.copernicus.eu/apihub/odata/v1/Products('7140df04-8b63-484d-8bc0-5dca8b73b516')/\$value"
+   	curl  --retry 5 -C - -n "https://scihub.copernicus.eu/apihub/odata/v1/Products('61f2d8ee-7baf-47b1-9ec9-046c1c8e5101')/\$value" -o S1A_IWi_GRDH_1SSV_20160606T001439_20160606T001504_011583_011B2C_920A.zip
+	curl  --retry 5 -C - -n "https://scihub.copernicus.eu/apihub/odata/v1/Products('de3a3ce6-fc7b-4719-8835-898c74bf04b6')/\$value" -o S1A_IW_SLC__1SDV_20160606T054304_20160606T054331_011586_011B3B_3DD0.zip
+	curl  --retry 5 -C - -n "https://scihub.copernicus.eu/apihub/odata/v1/Products('8494c194-8585-40e2-8a33-1b1bd99247a3')/\$value" -o S1A_IW_SLC__1SDV_20141213T161127_20141213T161154_003703_004659_04A3.zip
 
 
 ## Worked Example
