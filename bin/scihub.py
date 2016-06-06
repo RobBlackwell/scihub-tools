@@ -4,7 +4,7 @@ import json
 
 # Runs Open search queries against the Sentinels Scientific Data Hub.
 
-def search (query, auth=None):
+def raw_search (query, auth=None):
 
     # auth = None falls back to using credentials from ~.netrc
     url = 'https://scihub.copernicus.eu/apihub/search?format=json&q={}'.format(query)
@@ -16,17 +16,23 @@ def search (query, auth=None):
     #exit()
 
     if response.status_code == 200:
-        j = json.loads(response.text)
-
-        # print(j)
-        entries = None
-        if 'entry' in j['feed']:
-            entries = j['feed']['entry']
-
-        #print(entries)
-        return entries
+        return response.text
     else:
         raise ValueError('Query failed : %s:%s\n' % (response.status_code, response.text))
+
+
+def search (query, auth=None):
+
+    s = raw_search(query, auth)
+    j = json.loads(s)
+
+    # print(j)
+    entries = None
+    if 'entry' in j['feed']:
+        entries = j['feed']['entry']
+
+    #print(entries)
+    return entries
 
 
 def summary(entry):
@@ -39,8 +45,10 @@ def filename(entry):
 
 def curl_command(entry):
     url = entry['link'][0]['href'].replace("$","\$")
-    s = 'curl --retry 5 -C - -n -JO "{}"'.format(url)
+    f = filename(entry)
+    s = 'curl --retry 5 -C - -n "{}" -o {}'.format(url, f)
     return(s)
+
 
 def unzip_command(entry):
     f = filename(entry)
